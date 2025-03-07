@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Gmail Cleanup",
+  "version": "1.0",
+  "description": "List and unsubscribe from promotional emails",
+  "permissions": ["identity", "identity.email", "storage", "tabs"],
+  "oauth2": {
+    "client_id": "",
+    "scopes": ["https://mail.google.com/"]
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html"    
+  },
+  "host_permissions": ["https://www.googleapis.com/"]
+}

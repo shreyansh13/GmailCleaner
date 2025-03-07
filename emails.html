@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Categories</title>
+    <style>
+        /* General Page Styles */
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f4f9; 
+            padding: 30px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+
+        /* Dropdown Styling */
+        select {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Button Styles */
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #startFetching {
+            background-color: #28a745;
+            color: white;
+        }
+        #loadMoreBtn {
+            background-color: #007bff;
+            color: white;
+            display: none;
+        }
+        #deleteSelected {
+            background-color: #dc3545;
+            color: white;
+        }
+        #resetButton {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        /* Progress Bar */
+        #progress-container {
+            width: 100%;
+            max-width: 400px;
+            background: #ddd;
+            height: 8px;
+            border-radius: 5px;
+            display: none;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #4CAF50;
+            transition: width 0.4s ease-in-out;
+        }
+
+        /* Emails List */
+        #emailsList {
+            background: white;
+            width: 90vw;  /* Takes 90% of the screen width */
+            max-width: 90%;  /* Ensure it doesn't shrink too much */
+            height: 70vh; /* Takes 70% of screen height */
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            overflow-y: auto; /* Allow scrolling if too many emails */
+        }
+    </style>
+</head>
+<body>
+    <h2>📩 Email Categories</h2>
+
+    <!-- Category Selection Dropdown -->
+    <label for="emailCategory"><b>Select Email Type:</b></label>
+    <select id="emailCategory">
+        <option value="promotions">Promotional</option>
+        <option value="updates">Updates</option>
+        <option value="Primary">Inbox</option>
+    </select>
+
+    <!-- Buttons -->
+    <div>
+        <button id="resetButton">🔄 Reset</button>
+        <button id="startFetching">🚀 Start Fetching</button>
+        <button id="loadMoreBtn">⬇️ Load More</button>
+        <button id="deleteSelected">🗑️ Delete Selected Emails</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- Email Count Display -->
+    <div id="emailCountDisplay" style="display: none; font-weight: bold; margin-top: 10px;"></div>
+
+    <!-- Emails List -->
+    <div id="emailsList">Loading...</div>
+
+    <!-- Script -->
+    <script src="emails.js"></script>
+    <script>
+        document.getElementById("startFetching").addEventListener("click", () => {
+            const selectedCategory = document.getElementById("emailCategory").value;
+            chrome.runtime.sendMessage({ 
+                action: "startFetching", 
+                category: selectedCategory 
+            });
+        });
+
+        document.getElementById("resetButton").addEventListener("click", () => {
+            document.getElementById("emailsList").innerHTML = "Loading...";
+            document.getElementById("emailCountDisplay").style.display = "none";
+            document.getElementById("progress-container").style.display = "none";
+            document.getElementById("startFetching").style.display = "inline-block";
+            document.getElementById("loadMoreBtn").style.display = "none";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div id="emailsList"></div>
+    
+    <style>
+      .sender-group {
+          font-weight: bold;
+          cursor: pointer;
+          margin-top: 10px;
+      }
+      .sender-group .toggle {
+          font-size: 14px;
+          color: gray;
+          margin-left: 5px;
+      }
+      ul {
+          margin: 5px 0 10px 15px;
+          padding-left: 0;
+      }
+      li {
+          list-style-type: none;
+          font-size: 14px;
+          padding: 2px 0;
+      }
+    </style>
+    
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Cleaner</title>
+    <style>
+        body { width: 300px; padding: 10px; font-family: Arial, sans-serif; }
+        #emailsList { max-height: 300px; overflow-y: auto; }
+        .email-item { padding: 5px; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Gmail Cleanup</h1>
+    <button id="openEmailPage">Open Email Page</button>
+    <script src="popup.js"></script>
+</body>
+</html>
