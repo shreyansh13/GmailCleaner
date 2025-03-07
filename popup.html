@@ -1,43 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-    <div id="emailsList"></div>
-    
-    <style>
-      .sender-group {
-          font-weight: bold;
-          cursor: pointer;
-          margin-top: 10px;
-      }
-      .sender-group .toggle {
-          font-size: 14px;
-          color: gray;
-          margin-left: 5px;
-      }
-      ul {
-          margin: 5px 0 10px 15px;
-          padding-left: 0;
-      }
-      li {
-          list-style-type: none;
-          font-size: 14px;
-          padding: 2px 0;
-      }
-    </style>
-    
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gmail Cleaner</title>
+    
     <style>
-        body { width: 300px; padding: 10px; font-family: Arial, sans-serif; }
-        #emailsList { max-height: 300px; overflow-y: auto; }
-        .email-item { padding: 5px; border-bottom: 1px solid #ddd; }
+        /* General Styles */
+        body {
+            width: 320px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* Emails List Container */
+        #emailsList {
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        /* Sender Group Styling */
+        .sender-group {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 8px;
+            background: #e9ecef;
+            transition: 0.2s;
+        }
+
+        .sender-group:hover {
+            background: #dee2e6;
+        }
+
+        .sender-group .toggle {
+            font-size: 14px;
+            color: gray;
+            margin-left: 5px;
+        }
+
+        /* Email List Styling */
+        ul {
+            margin: 5px 0 10px 15px;
+            padding-left: 0;
+        }
+
+        li {
+            list-style-type: none;
+            font-size: 14px;
+            padding: 6px;
+            border-bottom: 1px solid #ddd;
+            transition: 0.2s;
+        }
+
+        li:hover {
+            background: #f1f1f1;
+        }
+
+        /* Scrollbar Styling */
+        #emailsList::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #emailsList::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        #emailsList::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 8px 15px;
+            border: none;
+            background: #007bff;
+            color: white;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
     </style>
 </head>
+
 <body>
-    <h1>Gmail Cleanup</h1>
+    <h1>📧 Gmail Cleanup</h1>
+    
     <button id="openEmailPage">Open Email Page</button>
-    <script src="popup.js"></script>    
+    
+    <!-- <div id="emailsList">
+        <p style="text-align: center; color: gray;">No emails loaded...</p>
+    </div> -->
+    
+    <script src="popup.js"></script>
 </body>
 </html>
