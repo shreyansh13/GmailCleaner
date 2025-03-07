@@ -74,9 +74,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateEmailList(emails, hasMore) {
-        if (!emails || Object.keys(emails).length === 0) return;
-        
+
         emailsList.innerHTML = "";
+
+        if (Object.keys(emails).length === 0) {
+            emailsList.innerHTML = `<p class="no-emails">📭 No emails found in this category.</p>`;
+            return;
+        }
+        // if (!emails || Object.keys(emails).length === 0) return;
+        
         let newEmailCount = 0;
         
         Object.entries(emails)
@@ -103,9 +109,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     unsubscribeLink.style.color = "gray";
                 }
 
-                senderDiv.innerHTML = `<strong>${sender}</strong> (${emailCount} emails) <span class="toggle">[+]</span>`;
-                senderDiv.prepend(selectAllCheckbox);
-                senderDiv.appendChild(unsubscribeLink);
+                const toggleButton = document.createElement("span");
+                toggleButton.classList.add("toggle");
+                toggleButton.textContent = "[+]";
+
+//                senderDiv.innerHTML = `<strong>${sender}</strong> (${emailCount} emails) <span class="toggle">[+]</span>`;
+
+                senderDiv.append(selectAllCheckbox, ` ${sender} (${emailCount} emails) `, toggleButton, unsubscribeLink);
+
+                // senderDiv.prepend(selectAllCheckbox);
+                // senderDiv.appendChild(unsubscribeLink);
 
                 const emailList = document.createElement("ul");
                 emailList.style.display = "none";
@@ -128,8 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 senderDiv.addEventListener("click", () => {
-                    emailList.style.display = emailList.style.display === "none" ? "block" : "none";
-                    senderDiv.querySelector(".toggle").textContent = emailList.style.display === "none" ? "[+]" : "[-]";
+                    const isHidden = emailList.style.display === "none";
+                    emailList.style.display = isHidden ? "block" : "none";
+                    toggleButton.textContent = isHidden ? "[-]" : "[+]";
                 });
 
                 selectAllCheckbox.addEventListener("change", function () {
@@ -140,12 +154,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 emailsList.appendChild(emailList);
             });
 
-        emailCountDisplay.style.display = "inline-block";
-        loadMoreBtn.disabled = false;
-        loadMoreBtn.style.display = hasMore ? "inline-block" : "none";
-        
-        emailCountDisplay.style.display = "block";
-        emailCountDisplay.textContent = `New emails loaded: ${newEmailCount}`;
+            // Update Email Count Display
+            emailCountDisplay.style.display = "block";
+            emailCountDisplay.textContent = `New emails loaded: ${newEmailCount}`;
+
+            // Load More Button
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.style.display = hasMore ? "inline-block" : "none";
     }
     
     
