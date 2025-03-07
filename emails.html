@@ -226,11 +226,30 @@
             color: #007bff;
         }
 
+        #emailCountDisplay {
+            display: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #28a745; /* Green Success Color */
+            color: white;
+            border-radius: 6px;
+            text-align: center;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        #emailCount {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
     <h2>📩 Email Categories</h2>
 
+    <select id="emailDropdown"></select>    
+    
     <!-- Category Selection Dropdown -->
     <label for="emailCategory"><b>Select Email Type:</b></label>
     <select id="emailCategory">
@@ -253,7 +272,7 @@
     </div>
 
     <!-- Email Count Display -->
-    <div id="emailCountDisplay" style="display: none; font-weight: bold; margin-top: 10px;"></div>
+    <div id="emailCountDisplay"></div>
 
     <!-- Emails List -->
     <div id="emailsList">Loading...</div>

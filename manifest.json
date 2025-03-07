@@ -6,7 +6,10 @@
   "permissions": ["identity", "identity.email", "storage", "tabs"],
   "oauth2": {
     "client_id": "265715440181-78fldgmfn18h6jq3e1re4kh7tr0fe2e7.apps.googleusercontent.com",
-    "scopes": ["https://mail.google.com/"]
+    "scopes": [
+      "https://mail.google.com/",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
   },
   "background": {
     "service_worker": "background.js",

@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const resetBtn = document.getElementById("resetButton");
     const categoryList = document.getElementById("emailCategory");
 
+    const emailDropdown = document.getElementById("emailDropdown");    
+
     emailsList.innerHTML = "";
     loadMoreBtn.style.display = "inline-block";
     loadMoreBtn.disabled = true;
@@ -19,6 +21,31 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteSelectedBtn.addEventListener("click", deleteSelectedEmails);
     resetBtn.addEventListener("click", resetEverything);
     categoryList.addEventListener("click", resetEverything);    
+
+    chrome.identity.getAuthToken({ interactive: true }, function (token) {
+        if (chrome.runtime.lastError) {
+            console.error("Auth Error:", chrome.runtime.lastError);
+            return;
+        }
+
+        console.log("Token:", token);
+
+        // Fetch user info (including email)
+        fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("User Info:", data);
+
+            if (data.email) {
+                emailDropdown.innerHTML = `<option value="${data.email}">${data.email}</option>`;
+            } else {
+                emailDropdown.innerHTML = `<option>No email found</option>`;
+            }
+        })
+        .catch(error => console.error("Error fetching email:", error));
+    });
 
      // Handle incoming messages
      chrome.runtime.onMessage.addListener((message) => {
@@ -38,6 +65,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 break;
         }
     });
+
+    function authenticateUser(userEmail) {
+        chrome.identity.getAuthToken({ interactive: true }, function (token) {
+            if (chrome.runtime.lastError) {
+                console.error(chrome.runtime.lastError);
+                return;
+            }
+            console.log("Authenticated as:", userEmail);
+            console.log("Token:", token);            
+        });
+    }
 
     function resetEverything() {
 
@@ -168,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Update Email Count Display
             emailCountDisplay.style.display = "block";
-            emailCountDisplay.textContent = `New emails loaded: ${newEmailCount}`;
+            emailCountDisplay.textContent = `Emails Fetched: ${newEmailCount}`;
 
             // Load More Button
             loadMoreBtn.disabled = false;
