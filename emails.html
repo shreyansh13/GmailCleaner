@@ -81,19 +81,151 @@
             transition: width 0.4s ease-in-out;
         }
 
-        /* Emails List */
+    
+        /* Main Email List Container */
         #emailsList {
-            background: white;
-            width: 90vw;  /* Takes 90% of the screen width */
-            max-width: 90%;  /* Ensure it doesn't shrink too much */
-            height: 70vh; /* Takes 70% of screen height */
+            background: #fff;
+            width: 90vw;
+            max-width: 90%;
+            height: 70vh; 
             margin: 20px auto;
-            padding: 20px;
+            padding: 20x;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             text-align: left;
-            overflow-y: auto; /* Allow scrolling if too many emails */
+            overflow-y: auto;            
         }
+
+        /* Sender Group Styling */
+        .sender-group {
+            background: linear-gradient(to right, #f1f1f1, #e6e6e6);
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            text-align: left;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s ease-in-out;
+            border-left: 6px solid #007bff;
+        }
+
+        .sender-group:nth-child(odd) {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            border-left: 6px solid #28a745;
+        }
+
+        .sender-group:hover {
+            background: #d6d6d6;
+        }
+
+        /* Unsubscribe Link */
+        .unsubscribe-link {
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .unsubscribe-link:hover {
+            text-decoration: underline;
+        }
+
+        .email-list {
+            background: #fafafa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 8px 0;
+            display: block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .email-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            transition: background 0.3s;
+        }
+
+        .email-list li:hover {
+            background: #e8f4ff;
+        }
+
+        /* Email List */
+        ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        /* Individual Email Item */
+        li {
+            background: #fafafa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        li:hover {
+            background: #e8f4ff;
+        }
+
+        /* Checkbox */
+        .email-checkbox {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        /* Email Link */
+        li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        li a:hover {
+            color: #007bff;
+        }
+
+        /* Toggle Button */
+        .toggle {
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+            color: #007bff;
+        }
+
+        .toggle:hover {
+            color: #0056b3;
+        }
+
+        /* No Emails Found Message */
+        .no-emails {
+            text-align: center;
+            font-size: 18px;
+            color: #777;
+            padding: 20px;
+        }
+
+        .email-list li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            flex-grow: 1;
+        }
+
+        .email-list li a:hover {
+            color: #007bff;
+        }
+
     </style>
 </head>
 <body>

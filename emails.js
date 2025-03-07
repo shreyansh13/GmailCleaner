@@ -81,16 +81,22 @@ document.addEventListener("DOMContentLoaded", function () {
             emailsList.innerHTML = `<p class="no-emails">📭 No emails found in this category.</p>`;
             return;
         }
-        // if (!emails || Object.keys(emails).length === 0) return;
-        
+
         let newEmailCount = 0;
         
         Object.entries(emails)
             .sort((a, b) => b[1].subjects.length - a[1].subjects.length)
-            .forEach(([sender, data]) => {
+            .forEach(([sender, data], index) => {
                 const senderDiv = document.createElement("div");
                 senderDiv.classList.add("sender-group");
 
+                if (index % 2 === 0) {
+                    senderDiv.style.borderLeftColor = "#007bff"; // Blue
+                } else {
+                    senderDiv.style.borderLeftColor = "#28a745"; // Green
+                }
+                
+                senderDiv.style.textAlign = "left"; 
                 const emailCount = data.subjects.length;
                 newEmailCount += emailCount;
 
@@ -115,7 +121,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //                senderDiv.innerHTML = `<strong>${sender}</strong> (${emailCount} emails) <span class="toggle">[+]</span>`;
 
-                senderDiv.append(selectAllCheckbox, ` ${sender} (${emailCount} emails) `, toggleButton, unsubscribeLink);
+                const senderText = document.createElement("span");
+                senderText.textContent = `${sender} (${emailCount} emails) `;
+                senderText.style.flexGrow = "1"; 
+
+                senderDiv.append(selectAllCheckbox, senderText, toggleButton, unsubscribeLink);
+
+                //senderDiv.append(selectAllCheckbox, ` ${sender} (${emailCount} emails) `, toggleButton, unsubscribeLink);
 
                 // senderDiv.prepend(selectAllCheckbox);
                 // senderDiv.appendChild(unsubscribeLink);
